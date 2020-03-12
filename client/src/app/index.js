@@ -1,14 +1,15 @@
-import React from 'react'
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ReviewHeader, FooterComponent } from '../components'
+import { ReviewHeader, FooterComponent } from '../components';
 
 function App() {
-    return (
-        <Router>
-            <ReviewHeader />
-            <FooterComponent />
-        </Router>
-    )
+  return (
+    <Router>
+      <ReviewHeader />
+      <FooterComponent />
+    </Router>
+  );
 }
 
-export default App
+export default App;

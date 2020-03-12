@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:9000/api',
-})
+  baseURL: 'http://localhost:9000/api',
+});
 
-export const getAllReviews = () => api.get(`/reviews`);
+export const getAllReviews = () => api.get('/reviews');
 
 const apis = {
-    getAllReviews
-}
+  getAllReviews,
+};
 
 export default apis;
