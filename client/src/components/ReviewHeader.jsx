@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable no-tabs */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable no-sequences */
@@ -54,56 +56,55 @@ class ReviewHeader extends Component {
                         / 6) / reviews.length).toFixed(2);
     return (
       <div>
-        <h2>Reviews</h2>
-        <div>
-          ⭐️
-          { totalAverage }
-          {' '}
-          { this.state.total }
-          {' '}
-          reviews
-        </div>
-        <div>
-          cleanliness
-          {' '}
-          { cleanliness / reviews.length }
-          {' '}
-          accuracy
-          {' '}
-          { accuracy / reviews.length }
-          {' '}
-          &nbsp;
-          value
-          {' '}
-          { value / reviews.length }
-          {' '}
-          check_in
-          {' '}
-          { check_in / reviews.length }
-          {' '}
-          communication
-          {' '}
-          { communication / reviews.length }
-          {' '}
-          &nbsp;
-          location
-          {' '}
-          { location / reviews.length }
-        </div>
-        <div>
-          {reviews.map((review, i) => (
-            <div key={i}>
-              {review.user_img}
-              {' '}
-              {review.username}
-              {' '}
-              {review.created_At}
-              {' '}
-              {review.text}
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-3">
+              <div>
+                <h2>Reviews</h2>
+                ⭐️
+                { totalAverage }
+                {' '}
+                { this.state.total }
+                {' '}
+                reviews
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+        <div className="col-sm-7">
+            <div>
+                cleanliness { cleanliness / reviews.length } {' '}
+                check_in { check_in / reviews.length }
+            </div>
+            <div>
+                accuracy { accuracy / reviews.length }{' '}
+                communication { communication / reviews.length }
+            </div>
+            <div>
+                value { value / reviews.length }{' '}
+                location { location / reviews.length }
+            </div>
+        </div>
+        <div className="row">
+    <div className="col-sm-7">
+	<hr />
+		<div className="review-block">
+            {reviews.map((review, i) => (
+            <div key={i} className="row">
+                <div className="col-sm-3">
+                    {/* <img src="" class="img-rounded"> */}
+                    <div><a href="#">{review.username}</a></div>
+                    <div>{review.created_At}</div>
+                </div>
+                <div className="col-sm-9">
+				    <div>{review.text}</div>
+                </div>
+            </div>
+            ))}
+        </div>
+        </div>
+        </div>
+        </div>
     );
   }
 }
