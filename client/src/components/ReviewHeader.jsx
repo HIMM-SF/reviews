@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ReadMoreReact from 'read-more-react';
 import Modal from './Modal.js'
+import { Line } from 'rc-progress';
 import api from '../api';
 
 const HeaderContainer = styled.div`
@@ -60,12 +61,12 @@ const PointsContainer = styled.div`
       left: 0;
       right: 0;
       width: 10%;
-      margin: auto auto 5px auto;
+      margin: auto auto 5px;
     }
     div:nth-child(3) {
       float:right;
       width: 10%;
-      margin: -35px 20px auto auto;
+      margin: -28px 50px auto auto;
     }
   }
 `;
@@ -206,11 +207,8 @@ class ReviewHeader extends Component {
     let communication = 0;
     let location = 0;
     let totalAverage = 0;
-    const num1 = Math.floor(Math.random() * 100);
+    const num1 = Math.floor(Math.random() * 40);
     let num2 = num1 + 6;
-    if (num1 >= 94) {
-      num2 = num1 - 6;
-    }
 
     { reviews.map((review, i) => (
       <div key={i}>
@@ -241,34 +239,34 @@ class ReviewHeader extends Component {
           <div id="wrapper1">
             <div id="cleanDiv">
               <div> Cleanliness </div>
-              <div><progress max="5" value={ cleanliness / reviews.length }></progress> </div>
+              <div><Line percent={ (cleanliness / reviews.length) * 20 } strokeWidth="3" width="150" strokeColor="black" /></div>
               <div> { (cleanliness / reviews.length).toFixed(1) } </div>
             </div>
             <div id="communicationDiv">
               <div> Communication </div>
-              <div><progress max="5" value={ communication / reviews.length }></progress></div>
+              <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (communication / reviews.length).toFixed(1) }</div>
             </div>
             <div id="check_inDiv">
               <div> Check_in </div> 
-              <div><progress max="5" value={ check_in / reviews.length }></progress></div>
+              <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (check_in / reviews.length).toFixed(1) } </div>
             </div>
           </div>
           <div id="wrapper2">
             <div id="accuracyDiv">
               <div>Accuracy</div>
-              <div><progress id="progress_accuracy" max="5" value={ accuracy / reviews.length }></progress></div>
+              <div><Line percent={ (accuracy / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (accuracy / reviews.length).toFixed(1) }</div>
             </div>
             <div id="locationDiv">
               <div>Location </div>
-              <div><progress max="5" value={ location / reviews.length }></progress></div>
+              <div><Line percent={ (location / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (location / reviews.length).toFixed(1) }</div>
             </div>
             <div id="valueDiv">
               <div>Value </div>
-              <div><progress max="5" value={ value / reviews.length }></progress></div>
+              <div><Line percent={ (value / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (value / reviews.length).toFixed(1) }</div>
             </div>
           </div>
@@ -297,8 +295,8 @@ class ReviewHeader extends Component {
         <Modal show={this.state.show} handleClose={this.hideModal} >
           <ModalContainer>
             <button id="closeBtn"onClick={this.hideModal}>X</button>
-            <div class="wrapper">
-              <div class="headerContainer">
+            <div className="wrapper">
+              <div className="headerContainer">
                 <HeaderContainer>
                   <div id="reviewHeader">
                     <div>
@@ -312,38 +310,38 @@ class ReviewHeader extends Component {
                   <div id="wrapper1">
                     <div id="cleanDiv">
                       <div> Cleanliness </div>
-                      <div><progress max="5" value={ cleanliness / reviews.length }></progress> </div>
+                      <div><Line percent={ (cleanliness / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div> { (cleanliness / reviews.length).toFixed(1) } </div>
                     </div>
                     <div id="communicationDiv">
                     <div> Communication </div>
-                      <div><progress max="5" value={ communication / reviews.length }></progress></div>
+                      <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (communication / reviews.length).toFixed(1) }</div>
                     </div>
                     <div id="check_inDiv">
                     <div> Check_in </div> 
-                      <div><progress max="5" value={ check_in / reviews.length }></progress></div>
+                      <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (check_in / reviews.length).toFixed(1) } </div>
                     </div>
                     <div id="accuracyDiv">
                     <div>Accuracy</div>
-                      <div><progress id="progress_accuracy" max="5" value={ accuracy / reviews.length }></progress></div>
+                      <div><Line percent={ (accuracy / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (accuracy / reviews.length).toFixed(1) }</div>
                     </div>
                     <div id="locationDiv">
                     <div>Location </div>
-                      <div><progress max="5" value={ location / reviews.length }></progress></div>
+                      <div><Line percent={ (location / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (location / reviews.length).toFixed(1) }</div>
                     </div>
                     <div id="valueDiv">
                       <div>Value </div>
-                      <div><progress max="5" value={ value / reviews.length }></progress></div>
+                      <div><Line percent={ (value / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (value / reviews.length).toFixed(1) }</div>
                     </div>
                   </div>
               </PointsContainer>
               </div>
-              <div class="reviewContainer">
+              <div className="reviewContainer">
                 { reviews.map((review, i) => (
                 <div key={i}>
                   <div id="userInfo">
