@@ -171,6 +171,8 @@ const ModalContainer = styled.div`
 `;
 
 class ReviewHeader extends Component {
+  _isMounted = false;
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -181,13 +183,20 @@ class ReviewHeader extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     api.getAllReviews()
       .then((res) => {
+        if(this._isMounted) {
         this.setState({
           total: res.data.data.length,
           reviews: res.data.data,
         });
+      }
       });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   showModal = () => {
