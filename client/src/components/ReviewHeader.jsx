@@ -12,7 +12,6 @@ const HeaderContainer = styled.div`
   font-family: 'Poppins';
   span:nth-child(1) {
     color: #FF385C;
-    font-size: 20px;
   }
   span:nth-child(2) {
     color: #222222;
@@ -41,7 +40,7 @@ const PointsContainer = styled.div`
     width: 50%;
     margin: auto;
   }
-  #cleanDiv, #communicationDiv, #check_inDiv, #accuracyDiv, #locationDiv, #valueDiv {
+  #cleanDiv, #communicationDiv, #checkInDiv, #accuracyDiv, #locationDiv, #valueDiv {
     width: 100%;
     div:nth-child(1) {
       float:left;
@@ -57,7 +56,8 @@ const PointsContainer = styled.div`
     div:nth-child(3) {
       float:right;
       width: 10%;
-      margin: -28px 50px auto auto;
+      margin: -25px 60px auto auto;
+      font-size: 13px;
     }
   }
 `;
@@ -65,7 +65,6 @@ const PointsContainer = styled.div`
 const ReviewContainer = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Poppins');
   width: 1000px;
-  // height: 50px;
   font-size: 18px;
   font-family: 'Poppins';
   display: grid;
@@ -82,6 +81,7 @@ const ReviewContainer = styled.div`
   }
   #text {
     font-size: 15px;
+    color: #484848;
   }
   #userInfo {
     display: flex;
@@ -135,7 +135,7 @@ const ModalContainer = styled.div`
     gap: 50px;
     grid-template-columns: 270px 200px 220px 200px ;
     grid-template-rows: repeat(100,minmax(5px,auto));
-    }
+  }
   .headerContainer {
     grid-column: 1;
     grid-row: 1 / 4;
@@ -156,9 +156,18 @@ const ModalContainer = styled.div`
       margin-bottom: 30px;
     }
   }
-  #reviewHeader {
+`;
+
+const ReadMoreContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins');
+  font-size: 17px;
+  font-family: 'Poppins';
+  div:nth-child(2)::first-line  {
     font-weight: bold;
-  }      
+    text-decoration: underline;
+    color: black;
+  }
+  }
 `;
 
 class ReviewHeader extends Component {
@@ -203,7 +212,7 @@ class ReviewHeader extends Component {
     let cleanliness = 0;
     let accuracy = 0;
     let value = 0;
-    let check_in = 0;
+    let checkIn = 0;
     let communication = 0;
     let location = 0;
     let totalAverage = 0;
@@ -216,13 +225,13 @@ class ReviewHeader extends Component {
             cleanliness += review.cleanliness,
             accuracy += review.accuracy,
             value += review.value,
-            check_in += review.check_in,
+            checkIn += review.checkIn,
             communication += review.communication,
             location += review.location
         }
       </div>
     ))}
-    totalAverage = (((cleanliness + accuracy + value + check_in + communication + location)
+    totalAverage = (((cleanliness + accuracy + value + checkIn + communication + location)
                         / 6) / reviews.length).toFixed(2);
     return (
       <div>
@@ -247,10 +256,10 @@ class ReviewHeader extends Component {
               <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (communication / reviews.length).toFixed(1) }</div>
             </div>
-            <div id="check_inDiv">
+            <div id="checkInDiv">
               <div> Check_in </div> 
-              <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
-              <div>{ (check_in / reviews.length).toFixed(1) } </div>
+              <div><Line percent={ (checkIn / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+              <div>{ (checkIn / reviews.length).toFixed(1) } </div>
             </div>
           </div>
           <div id="wrapper2">
@@ -275,21 +284,23 @@ class ReviewHeader extends Component {
         { reviews.slice(num1, num2).map((review, i) => (
           <div key={i}>
             <div id="userInfo">
-              <img id="userImage" src={review.user_img}/>
+              <img id="userImage" src={review.userImg}/>
               <div id="userInfo2">
                   <div id="username">{review.firstName}</div>
-                  <div id="created_at">{review.created_Month} {review.year}</div>
+                  <div id="created_at">{review.createdMonth} {review.year}</div>
               </div>
             </div>
-            <div id="text">
+              <ReadMoreContainer>
+              <div id="text">
               <ReadMoreReact
                 text={review.text}
                 min={1}
                 ideal={70}
                 max={150}
-                readMoreText="read more"
+                readMoreText= "read more"
               />
-            </div>
+              </div>
+              </ReadMoreContainer>
           </div>
         ))}
         <Modal show={this.state.show} handleClose={this.hideModal} >
@@ -298,7 +309,7 @@ class ReviewHeader extends Component {
             <div className="wrapper">
               <div className="headerContainer">
                 <HeaderContainer>
-                  <div id="reviewHeader">
+                  <div id="reviewHeader" className="reviewHeader">
                     <div>
                       <span>★</span> <span>{ totalAverage }
                       {' '}
@@ -318,10 +329,10 @@ class ReviewHeader extends Component {
                       <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (communication / reviews.length).toFixed(1) }</div>
                     </div>
-                    <div id="check_inDiv">
+                    <div id="checkInDiv">
                     <div> Check_in </div> 
-                      <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
-                      <div>{ (check_in / reviews.length).toFixed(1) } </div>
+                      <div><Line percent={ (checkIn / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (checkIn / reviews.length).toFixed(1) } </div>
                     </div>
                     <div id="accuracyDiv">
                     <div>Accuracy</div>
@@ -345,12 +356,13 @@ class ReviewHeader extends Component {
                 { reviews.map((review, i) => (
                 <div key={i}>
                   <div id="userInfo">
-                    <img id="userImage" src={review.user_img}/>
+                    <img id="userImage" src={review.userImg}/>
                   <div id="userInfo2">
                     <div id="username">{review.firstName}</div>
-                    <div id="created_at">{review.created_Month}</div>
+                    <div id="created_at">{review.createdMonth}</div>
                   </div>
                 </div>
+                <ReadMoreContainer>
                 <div id="text">
                   <ReadMoreReact
                     text={review.text}
@@ -360,6 +372,7 @@ class ReviewHeader extends Component {
                     readMoreText="read more"
                   />
                 </div>
+                </ReadMoreContainer>
                 </div>
                 ))}
               </div>
