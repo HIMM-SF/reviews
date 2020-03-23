@@ -49,6 +49,7 @@
     "react-dom": "^16.13.0",
     "react-js-pagination": "^3.0.3",
     "react-paginate": "^6.3.2",
+    "react-read-more": "^1.0.0",
     "react-sweet-progress": "^1.1.2",
     "read-more-react": "^1.0.10",
     "styled-components": "^5.0.1"

@@ -1,12 +1,3 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable no-tabs */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable jsx-a11y/accessible-emoji */
-/* eslint-disable no-sequences */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable camelcase */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-lone-blocks */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ReadMoreReact from 'read-more-react';
@@ -287,7 +278,7 @@ class ReviewHeader extends Component {
               <img id="userImage" src={review.user_img}/>
               <div id="userInfo2">
                   <div id="username">{review.firstName}</div>
-                  <div id="created_at">{review.created_Month}</div>
+                  <div id="created_at">{review.created_Month} {review.year}</div>
               </div>
             </div>
             <div id="text">
