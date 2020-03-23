@@ -12,7 +12,6 @@ const HeaderContainer = styled.div`
   font-family: 'Poppins';
   span:nth-child(1) {
     color: #FF385C;
-    font-size: 20px;
   }
   span:nth-child(2) {
     color: #222222;
@@ -57,7 +56,8 @@ const PointsContainer = styled.div`
     div:nth-child(3) {
       float:right;
       width: 10%;
-      margin: -28px 50px auto auto;
+      margin: -25px 60px auto auto;
+      font-size: 13px;
     }
   }
 `;
@@ -65,7 +65,6 @@ const PointsContainer = styled.div`
 const ReviewContainer = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Poppins');
   width: 1000px;
-  // height: 50px;
   font-size: 18px;
   font-family: 'Poppins';
   display: grid;
@@ -82,6 +81,7 @@ const ReviewContainer = styled.div`
   }
   #text {
     font-size: 15px;
+    color: #484848;
   }
   #userInfo {
     display: flex;
@@ -156,9 +156,6 @@ const ModalContainer = styled.div`
       margin-bottom: 30px;
     }
   }
-  #reviewHeader {
-    font-weight: bold;
-  }
 `;
 
 const ReadMoreContainer = styled.div`
@@ -168,6 +165,7 @@ const ReadMoreContainer = styled.div`
   div:nth-child(2)::first-line  {
     font-weight: bold;
     text-decoration: underline;
+    color: black;
   }
   }
 `;
@@ -208,8 +206,6 @@ class ReviewHeader extends Component {
   hideModal = () => {
     this.setState({ show: false });
   }
-
-  
 
   render() {
     const { reviews } = this.state;
@@ -295,6 +291,7 @@ class ReviewHeader extends Component {
               </div>
             </div>
               <ReadMoreContainer>
+              <div id="text">
               <ReadMoreReact
                 text={review.text}
                 min={1}
@@ -302,6 +299,7 @@ class ReviewHeader extends Component {
                 max={150}
                 readMoreText= "read more"
               />
+              </div>
               </ReadMoreContainer>
           </div>
         ))}
@@ -311,7 +309,7 @@ class ReviewHeader extends Component {
             <div className="wrapper">
               <div className="headerContainer">
                 <HeaderContainer>
-                  <div id="reviewHeader">
+                  <div id="reviewHeader" className="reviewHeader">
                     <div>
                       <span>★</span> <span>{ totalAverage }
                       {' '}
