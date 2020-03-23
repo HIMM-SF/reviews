@@ -135,7 +135,7 @@ const ModalContainer = styled.div`
     gap: 50px;
     grid-template-columns: 270px 200px 220px 200px ;
     grid-template-rows: repeat(100,minmax(5px,auto));
-    }
+  }
   .headerContainer {
     grid-column: 1;
     grid-row: 1 / 4;
@@ -158,7 +158,18 @@ const ModalContainer = styled.div`
   }
   #reviewHeader {
     font-weight: bold;
-  }      
+  }
+`;
+
+const ReadMoreContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins');
+  font-size: 17px;
+  font-family: 'Poppins';
+  div:nth-child(2)::first-line  {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  }
 `;
 
 class ReviewHeader extends Component {
@@ -197,6 +208,8 @@ class ReviewHeader extends Component {
   hideModal = () => {
     this.setState({ show: false });
   }
+
+  
 
   render() {
     const { reviews } = this.state;
@@ -281,15 +294,15 @@ class ReviewHeader extends Component {
                   <div id="created_at">{review.createdMonth} {review.year}</div>
               </div>
             </div>
-            <div id="text">
+              <ReadMoreContainer>
               <ReadMoreReact
                 text={review.text}
                 min={1}
                 ideal={70}
                 max={150}
-                readMoreText="read more"
+                readMoreText= "read more"
               />
-            </div>
+              </ReadMoreContainer>
           </div>
         ))}
         <Modal show={this.state.show} handleClose={this.hideModal} >
@@ -351,6 +364,7 @@ class ReviewHeader extends Component {
                     <div id="created_at">{review.createdMonth}</div>
                   </div>
                 </div>
+                <ReadMoreContainer>
                 <div id="text">
                   <ReadMoreReact
                     text={review.text}
@@ -360,6 +374,7 @@ class ReviewHeader extends Component {
                     readMoreText="read more"
                   />
                 </div>
+                </ReadMoreContainer>
                 </div>
                 ))}
               </div>
