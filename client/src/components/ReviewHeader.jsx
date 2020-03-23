@@ -57,7 +57,7 @@ class ReviewHeader extends Component {
     return (
       <div>
         <div className="container">
-          <div className="row">
+          <div className="row" id="reviewHeader">
             <div className="col-sm-3">
               <div>
                 <h2>Reviews</h2>
