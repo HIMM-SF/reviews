@@ -10,20 +10,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ReadMoreReact from 'read-more-react';
-import Modal from "/Users/minhocha/Desktop/reviews/client/src/components/Modal.js";
+import Modal from './Modal.js'
+import { Line } from 'rc-progress';
 import api from '../api';
 
 const HeaderContainer = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Poppins');
   width: 500px;
   height: 50px;
-  font-size: 20px;
   font-family: 'Poppins';
   span:nth-child(1) {
     color: #FF385C;
+    font-size: 20px;
   }
   span:nth-child(2) {
     color: #222222;
+    font-size: 20px;
+  }
+  #reviewHeader {
+    font-weight: bold;
   }
 `;
 
@@ -56,12 +61,12 @@ const PointsContainer = styled.div`
       left: 0;
       right: 0;
       width: 10%;
-      margin: auto auto 5px auto;
+      margin: auto auto 5px;
     }
     div:nth-child(3) {
       float:right;
       width: 10%;
-      margin: -35px 20px auto auto;
+      margin: -28px 50px auto auto;
     }
   }
 `;
@@ -111,7 +116,58 @@ const ReviewContainer = styled.div`
     border-radius: 5%;
     border-width: 1.2px;
     border-color: black;
+    font-size: 15px;
+    font-weight: bold;
   }
+`;
+
+const ModalContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins');
+  width: 1100px;
+  height: 800px;
+  font-family: 'Poppins';
+  background: white;
+  border-radius: 1%;
+  margin-top: 30px;
+  #closeBtn {
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 30px;
+    background-color: Transparent;
+    border: none;
+    grid-template-areas: "header"
+  }
+  .wrapper {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: 270px 200px 220px 200px ;
+    grid-template-rows: repeat(100,minmax(5px,auto));
+    }
+  .headerContainer {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    #wrapper1 {
+      color: black;
+    }
+    margin-top: 20px;
+    margin-left: 20px;
+  } 
+  .reviewContainer{
+    grid-column: 3 / 5;
+    grid-row: 1 / 4;
+    overflow: auto;
+    max-height: 100vh;
+    height: 700px;
+    margin-top: 20px;
+    #text {
+      margin-bottom: 30px;
+    }
+  }
+  #reviewHeader {
+    font-weight: bold;
+  }      
 `;
 
 class ReviewHeader extends Component {
@@ -134,6 +190,14 @@ class ReviewHeader extends Component {
       });
   }
 
+  showModal = () => {
+    this.setState({ show: true });
+  }
+  
+  hideModal = () => {
+    this.setState({ show: false });
+  }
+
   render() {
     const { reviews } = this.state;
     let cleanliness = 0;
@@ -143,11 +207,8 @@ class ReviewHeader extends Component {
     let communication = 0;
     let location = 0;
     let totalAverage = 0;
-    const num1 = Math.floor(Math.random() * 100);
+    const num1 = Math.floor(Math.random() * 40);
     let num2 = num1 + 6;
-    if (num1 >= 94) {
-      num2 = num1 - 6;
-    }
 
     { reviews.map((review, i) => (
       <div key={i}>
@@ -178,34 +239,34 @@ class ReviewHeader extends Component {
           <div id="wrapper1">
             <div id="cleanDiv">
               <div> Cleanliness </div>
-              <div><progress max="5" value={ cleanliness / reviews.length }></progress> </div>
+              <div><Line percent={ (cleanliness / reviews.length) * 20 } strokeWidth="3" width="150" strokeColor="black" /></div>
               <div> { (cleanliness / reviews.length).toFixed(1) } </div>
             </div>
             <div id="communicationDiv">
               <div> Communication </div>
-              <div><progress max="5" value={ communication / reviews.length }></progress></div>
+              <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (communication / reviews.length).toFixed(1) }</div>
             </div>
             <div id="check_inDiv">
               <div> Check_in </div> 
-              <div><progress max="5" value={ check_in / reviews.length }></progress></div>
+              <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (check_in / reviews.length).toFixed(1) } </div>
             </div>
           </div>
           <div id="wrapper2">
             <div id="accuracyDiv">
               <div>Accuracy</div>
-              <div><progress id="progress_accuracy" max="5" value={ accuracy / reviews.length }></progress></div>
+              <div><Line percent={ (accuracy / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (accuracy / reviews.length).toFixed(1) }</div>
             </div>
             <div id="locationDiv">
               <div>Location </div>
-              <div><progress max="5" value={ location / reviews.length }></progress></div>
+              <div><Line percent={ (location / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (location / reviews.length).toFixed(1) }</div>
             </div>
             <div id="valueDiv">
               <div>Value </div>
-              <div><progress max="5" value={ value / reviews.length }></progress></div>
+              <div><Line percent={ (value / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (value / reviews.length).toFixed(1) }</div>
             </div>
           </div>
@@ -231,11 +292,81 @@ class ReviewHeader extends Component {
             </div>
           </div>
         ))}
-        <Modal show={this.state.show} handleClose={this.hideModal}>
-          <p>Modal</p>
-          <p>Data</p>
+        <Modal show={this.state.show} handleClose={this.hideModal} >
+          <ModalContainer>
+            <button id="closeBtn"onClick={this.hideModal}>X</button>
+            <div className="wrapper">
+              <div className="headerContainer">
+                <HeaderContainer>
+                  <div id="reviewHeader">
+                    <div>
+                      <span>★</span> <span>{ totalAverage }
+                      {' '}
+                      ({ this.state.total } {' '} reviews)</span>
+                    </div>
+                  </div>
+                </HeaderContainer>
+                <PointsContainer>
+                  <div id="wrapper1">
+                    <div id="cleanDiv">
+                      <div> Cleanliness </div>
+                      <div><Line percent={ (cleanliness / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div> { (cleanliness / reviews.length).toFixed(1) } </div>
+                    </div>
+                    <div id="communicationDiv">
+                    <div> Communication </div>
+                      <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (communication / reviews.length).toFixed(1) }</div>
+                    </div>
+                    <div id="check_inDiv">
+                    <div> Check_in </div> 
+                      <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (check_in / reviews.length).toFixed(1) } </div>
+                    </div>
+                    <div id="accuracyDiv">
+                    <div>Accuracy</div>
+                      <div><Line percent={ (accuracy / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (accuracy / reviews.length).toFixed(1) }</div>
+                    </div>
+                    <div id="locationDiv">
+                    <div>Location </div>
+                      <div><Line percent={ (location / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (location / reviews.length).toFixed(1) }</div>
+                    </div>
+                    <div id="valueDiv">
+                      <div>Value </div>
+                      <div><Line percent={ (value / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (value / reviews.length).toFixed(1) }</div>
+                    </div>
+                  </div>
+              </PointsContainer>
+              </div>
+              <div className="reviewContainer">
+                { reviews.map((review, i) => (
+                <div key={i}>
+                  <div id="userInfo">
+                    <img id="userImage" src={review.user_img}/>
+                  <div id="userInfo2">
+                    <div id="username">{review.firstName}</div>
+                    <div id="created_at">{review.created_Month}</div>
+                  </div>
+                </div>
+                <div id="text">
+                  <ReadMoreReact
+                    text={review.text}
+                    min={1}
+                    ideal={70}
+                    max={150}
+                    readMoreText="read more"
+                  />
+                </div>
+                </div>
+                ))}
+              </div>
+            </div>
+          </ModalContainer>
         </Modal>
-        <button id="reviewBtn" type="button" >Show all { this.state.total } reviews</button>
+        <button id="reviewBtn" type="button" onClick={this.showModal}>Show all { this.state.total } reviews</button>
         </ReviewContainer>
       </div>
     );
