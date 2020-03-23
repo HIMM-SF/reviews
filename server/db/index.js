@@ -17,25 +17,25 @@ const reviews = [];
 for (let i = 0; i < 100; i++) {
   const firstName = faker.name.firstName();
   const text = faker.lorem.paragraphs();
-  const user_img = faker.image.avatar();
-  const created_Month = faker.date.month();
-  const communication = faker.random.number({ 'min': 3, 'max': 5 });
-  const accuracy = faker.random.number({ 'min': 3, 'max': 5 });
-  const location = faker.random.number({ 'min': 3, 'max': 5 });
-  const check_in = faker.random.number({ 'min': 3, 'max': 5 });
-  const value = faker.random.number({ 'min': 3, 'max': 5 });
-  const cleanliness = faker.random.number({ 'min': 3, 'max': 5 });
-  const year = faker.random.number({ 'min': 2011, 'max': 2020 });
+  const userImg = faker.image.avatar();
+  const createdMonth = faker.date.month();
+  const communication = faker.random.number({ min: 3, max: 5 });
+  const accuracy = faker.random.number({ min: 3, max: 5 });
+  const location = faker.random.number({ min: 3, max: 5 });
+  const checkIn = faker.random.number({ min: 3, max: 5 });
+  const value = faker.random.number({ min: 3, max: 5 });
+  const cleanliness = faker.random.number({ min: 3, max: 5 });
+  const year = faker.random.number({ min: 2011, max: 2020 });
 
   const newReview = {
     firstName,
     text,
-    user_img,
-    created_Month,
+    userImg,
+    createdMonth,
     communication,
     accuracy,
     location,
-    check_in,
+    checkIn,
     value,
     cleanliness,
     year,

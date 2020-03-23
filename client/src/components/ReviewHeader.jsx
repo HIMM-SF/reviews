@@ -41,7 +41,7 @@ const PointsContainer = styled.div`
     width: 50%;
     margin: auto;
   }
-  #cleanDiv, #communicationDiv, #check_inDiv, #accuracyDiv, #locationDiv, #valueDiv {
+  #cleanDiv, #communicationDiv, #checkInDiv, #accuracyDiv, #locationDiv, #valueDiv {
     width: 100%;
     div:nth-child(1) {
       float:left;
@@ -203,7 +203,7 @@ class ReviewHeader extends Component {
     let cleanliness = 0;
     let accuracy = 0;
     let value = 0;
-    let check_in = 0;
+    let checkIn = 0;
     let communication = 0;
     let location = 0;
     let totalAverage = 0;
@@ -216,13 +216,13 @@ class ReviewHeader extends Component {
             cleanliness += review.cleanliness,
             accuracy += review.accuracy,
             value += review.value,
-            check_in += review.check_in,
+            checkIn += review.checkIn,
             communication += review.communication,
             location += review.location
         }
       </div>
     ))}
-    totalAverage = (((cleanliness + accuracy + value + check_in + communication + location)
+    totalAverage = (((cleanliness + accuracy + value + checkIn + communication + location)
                         / 6) / reviews.length).toFixed(2);
     return (
       <div>
@@ -247,10 +247,10 @@ class ReviewHeader extends Component {
               <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
               <div>{ (communication / reviews.length).toFixed(1) }</div>
             </div>
-            <div id="check_inDiv">
+            <div id="checkInDiv">
               <div> Check_in </div> 
-              <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
-              <div>{ (check_in / reviews.length).toFixed(1) } </div>
+              <div><Line percent={ (checkIn / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+              <div>{ (checkIn / reviews.length).toFixed(1) } </div>
             </div>
           </div>
           <div id="wrapper2">
@@ -275,10 +275,10 @@ class ReviewHeader extends Component {
         { reviews.slice(num1, num2).map((review, i) => (
           <div key={i}>
             <div id="userInfo">
-              <img id="userImage" src={review.user_img}/>
+              <img id="userImage" src={review.userImg}/>
               <div id="userInfo2">
                   <div id="username">{review.firstName}</div>
-                  <div id="created_at">{review.created_Month} {review.year}</div>
+                  <div id="created_at">{review.createdMonth} {review.year}</div>
               </div>
             </div>
             <div id="text">
@@ -318,10 +318,10 @@ class ReviewHeader extends Component {
                       <div><Line percent={ (communication / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
                       <div>{ (communication / reviews.length).toFixed(1) }</div>
                     </div>
-                    <div id="check_inDiv">
+                    <div id="checkInDiv">
                     <div> Check_in </div> 
-                      <div><Line percent={ (check_in / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
-                      <div>{ (check_in / reviews.length).toFixed(1) } </div>
+                      <div><Line percent={ (checkIn / reviews.length) * 20 } strokeWidth="3" width="150"  strokeColor="black" /></div>
+                      <div>{ (checkIn / reviews.length).toFixed(1) } </div>
                     </div>
                     <div id="accuracyDiv">
                     <div>Accuracy</div>
@@ -345,10 +345,10 @@ class ReviewHeader extends Component {
                 { reviews.map((review, i) => (
                 <div key={i}>
                   <div id="userInfo">
-                    <img id="userImage" src={review.user_img}/>
+                    <img id="userImage" src={review.userImg}/>
                   <div id="userInfo2">
                     <div id="username">{review.firstName}</div>
-                    <div id="created_at">{review.created_Month}</div>
+                    <div id="created_at">{review.createdMonth}</div>
                   </div>
                 </div>
                 <div id="text">
