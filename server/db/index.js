@@ -10,7 +10,7 @@ mongoose
 
 const db = mongoose.connection;
 
-const reviewsCollection = db.collection("reviews");
+const reviewsCollection = db.collection('reviews');
 
 const reviews = [];
 
@@ -19,14 +19,15 @@ for (let i = 0; i < 100; i++) {
   const text = faker.lorem.paragraphs();
   const user_img = faker.image.avatar();
   const created_Month = faker.date.month();
-  const communication = faker.random.number({ max: 5 });
-  const accuracy = faker.random.number({ max: 5 });
-  const location = faker.random.number({ max: 5 });
-  const check_in = faker.random.number({ max: 5 });
-  const value = faker.random.number({ max: 5 });
-  const cleanliness = faker.random.number({ max: 5 });
+  const communication = faker.random.number({ 'min': 3, 'max': 5 });
+  const accuracy = faker.random.number({ 'min': 3, 'max': 5 });
+  const location = faker.random.number({ 'min': 3, 'max': 5 });
+  const check_in = faker.random.number({ 'min': 3, 'max': 5 });
+  const value = faker.random.number({ 'min': 3, 'max': 5 });
+  const cleanliness = faker.random.number({ 'min': 3, 'max': 5 });
+  const year = faker.random.number({ 'min': 2011, 'max': 2020 });
 
-  let newReview = {
+  const newReview = {
     firstName,
     text,
     user_img,
@@ -37,6 +38,7 @@ for (let i = 0; i < 100; i++) {
     check_in,
     value,
     cleanliness,
+    year,
   };
   reviews.push(newReview);
 }

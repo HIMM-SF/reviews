@@ -15,6 +15,7 @@ const Review = new Schema(
   { check_in: { type: Number } },
   { value: { type: Number } },
   { cleanliness: { type: Number } },
+  { year: { type: Number } },
 );
 
 module.exports = mongoose.model('reviews', Review);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Modal.css';
 
 const Modal = ({ handleClose, show, children }) => {
@@ -6,7 +6,7 @@ const Modal = ({ handleClose, show, children }) => {
 
   return (
     <div className={showHideClassName}>
-      <section className='modal-main'>
+      <section className="modal-main">
         {children}
       </section>
     </div>
