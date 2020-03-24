@@ -1,11 +1,8 @@
-/* eslint-disable no-useless-constructor */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ReviewHeader } from '../components';
 
-class App extends React.Component {
+class Review extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -19,4 +16,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Review;

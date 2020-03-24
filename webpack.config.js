@@ -12,7 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?jsx$|\.m?js$|\.scss$|\.m?css$/, 
+        test: /\.m?jsx$|\.m?js$|\.scss$/, 
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
