@@ -1,24 +1,30 @@
-/* eslint-disable no-console */
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const db = require('./db');
 const reviewRouter = require('./routes/review-router');
-
 const app = express();
-const port = 8000;
+const db = require('./models/review-model');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../client', 'public')));
+
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+// app.get('/api/reviews/', function(req, res) {
+//   db.query((err, data) => {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       res.json(data);
+//     }
+//   })
+// });
 
 app.use('/api', reviewRouter);
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Listening to PORT ${PORT}`);
+});
