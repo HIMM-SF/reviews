@@ -1,21 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require('../db/db');
 
-const { Schema } = mongoose;
+const Review = mongoose.model('Reviews', new mongoose.Schema({
+  username: String,
+  text: String,
+  userImg: String,
+  createdMonth: String,
+  communication: Number,
+  accuracy: Number,
+  location: Number,
+  checkIn: Number,
+  value: Number,
+  cleanliness: Number,
+  year: Number,
+}));
 
-const Review = new Schema(
-  {
-    username: { type: String },
-    text: { type: String },
-    userImg: { type: String },
-    createdMonth: { type: String },
-  },
-  { communication: { type: Number } },
-  { accuracy: { type: Number } },
-  { location: { type: Number } },
-  { checkIn: { type: Number } },
-  { value: { type: Number } },
-  { cleanliness: { type: Number } },
-  { year: { type: Number } },
-);
+const query = (callback) => {
+  Review.find({}, function(err, repos) {
+      if (err) {
+          console.log(err)
+      } else {
+          callback(null, repos)
+      }
+  })
+}
 
-module.exports = mongoose.model('reviews', Review);
+module.exports = Review;
+module.exports.query = query;

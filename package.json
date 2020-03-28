@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server",
-    "react-dev": "webpack",
-    "seed": "node ./server/index.js"
+    "seedDB": "node server/seedDB.js",
+    "start": "node server/index.js",
+    "react-dev": "webpack -w"
   },
   "repository": {
     "type": "git",
